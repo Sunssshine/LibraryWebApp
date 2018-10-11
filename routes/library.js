@@ -34,7 +34,7 @@ router.get('/books/:bookTitle', function(req, res)
 
     if(req.query.getBack)
     {
-        global.libraryState.books[calledBookNumber].user = "";
+        global.libraryState.books[calledBookNumber].user = "";              // TODO сделать нормальными поля ввода дат
         global.libraryState.books[calledBookNumber].deadline = "";
         global.libraryState.books[calledBookNumber].onHands = "True";
     }
@@ -48,7 +48,7 @@ router.get('/books/:bookTitle', function(req, res)
 
     if(req.query.deleteBook)
     {
-        array.splice(global.libraryState.books[calledBookNumber], 1)
+        array.splice(global.libraryState.books[calledBookNumber], 1) // TODO разобраться с PUT запросами
     }
 
     console.log(global.libraryState.books[calledBookNumber]);
