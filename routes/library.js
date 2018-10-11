@@ -48,7 +48,7 @@ router.get('/books/:bookTitle', function(req, res)
 
     if(req.query.deleteBook)
     {
-        array.splice(global.libraryState.books[calledBookNumber], 1) // TODO разобраться с PUT запросами
+        array.splice(global.libraryState.books[calledBookNumber], 1) // TODO разобраться с PUT и DELETE запросами
     }
 
     console.log(global.libraryState.books[calledBookNumber]);
