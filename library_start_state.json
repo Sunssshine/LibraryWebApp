@@ -1,0 +1,44 @@
+{
+  "books":[
+    {
+      "title": "Война и Мир",
+      "author": "Неважно",
+      "onHands": "True",
+      "releaseDate": "01/01/1998"
+    },
+    {
+      "title": "Война и Война",
+      "author": "Неважно",
+      "onHands": "False",
+      "releaseDate": "01/02/1998",
+      "deadline": "13/12/2018",
+      "user": "Данил Ильяшук"
+    },
+    {
+      "title": "Незнайка на луне",
+      "author": "Неважно",
+      "onHands": "False",
+      "releaseDate": "01/03/1998",
+      "deadline": "11/12/2018",
+      "user": "Никита Ваганов"
+    },
+    {
+      "title": "Вино из одуванчиков",
+      "author": "Неважно",
+      "onHands": "True",
+      "releaseDate": "01/04/1998"
+    },
+    {
+      "title": "Атлант расправил плечи",
+      "author": "Неважно",
+      "onHands": "True",
+      "releaseDate": "01/05/1998"
+    },
+    {
+      "title": "1984",
+      "author": "Неважно",
+      "onHands": "True",
+      "releaseDate": "01/06/1998"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+extends layout
+
+block content
+    .w3-card-4(style="max-width:50%; position:relative; left:25%;")
+        form(action=`/library/books/${book.title}` method='PUT' name="change-book-state")
+            .w3-container.w3-theme.w3-flat-midnight-blue.w3-center
+                h2 "#{book.title}"
+                a.w3-bar-item.w3-button.w3-display-topleft.w3-flat-wisteria(href=`/library`)
+                    i.fa.fa-caret-left &nbsp Назад
+                a.w3-bar-item.w3-button.w3-display-topright.w3-flat-wisteria(href=`/library`)
+                    i.fas.fa-trash-alt &nbsp
+            .w3-container
+                p
+                    input.w3-input.w3-animate-input(type='text' name='title' style="width:30%" value=`${book.title}`)
+                    label.w3-tag.w3-flat-green-sea Название
+                p
+                    input.w3-input.w3-animate-input(type='text' name='author' style="width:30%" value=`${book.author}`)
+                    label.w3-tag.w3-flat-green-sea Автор
+                p
+                    input.w3-input.w3-animate-input(type='text' name='releaseData' style="width:30%" value=`${book.releaseDate}`)
+                    label.w3-tag.w3-flat-green-sea Дата выпуска
+
+            button.w3-button.w3-block.w3-flat-pumpkin(type="submit")
+                h2 Сохранить изменения
+        button.w3-button.w3-block.w3-flat-nephritis(onclick="showModal();") Изменить статус книги
+    #id01.w3-modal.w3-animate-opacity
+        form(action=`./${book.title}` method='PUT' name="change-book-state")
+            .w3-modal-content.w3-card-4(style="max-width: 40%")
+                if (book.onHands == "False")
+                    header.w3-container.w3-teal.w3-center
+                        h2 Книга находится у пользователя
+                        h3 #{book.user}
+                        span.w3-button.w3-large.w3-display-topright(onclick="hideModal();") &times;
+                    .w3-container
+                        p
+                            input.w3-input.w3-animate-input(type='text' name=`usertake` style="width:50%" value=`${book.user}` disabled)
+                            label.w3-tag.w3-flat-green-sea Имя пользователя
+                        p
+                            input.w3-input.w3-animate-input(type='text' name=`deadline` style="width:30%" value=`${book.deadline}` disabled)
+                            label.w3-tag.w3-flat-green-sea Крайний срок возврата
+                    button.w3-button.w3-block.w3-flat-nephritis(type="submit" name="getBack" value="book") Забрать книгу
+                else
+                    header.w3-container.w3-teal.w3-center
+                        h2 Книга находится в библиотеке
+                        span.w3-button.w3-large.w3-display-topright(onclick="hideModal();") &times;
+                    .w3-container
+                        p
+                            input.w3-input.w3-animate-input(type='text' name=`usertake` style="width:50%" value=`` placeholder="Введите имя пользователя которому будет выдана книга")
+                            label.w3-tag.w3-flat-green-sea Имя пользователя
+                        p
+                            input.w3-input.w3-animate-input(type='text' name=`deadline` style="width:30%" value=`` placeholder="Введите крайний срок возврата книги")
+                            label.w3-tag.w3-flat-green-sea Крайний срок возврата
+                    button.w3-button.w3-block.w3-flat-nephritis(type="submit") Выдать книгу
+    script.
+        var newValBookOnHands;
+        books.onHands = "True";
+
+        function showModal()
+        {
+            document.getElementById('id01').style.display='block'
+        }
+        function hideModal()
+        {
+            document.getElementById('id01').style.display='none'
+        }
+        function getBookBack()
+        {
+            newValBookOnHands = "False";
+        }
+        function giveBook()
+        {
+            newValBookOnHands = "True";
+        }

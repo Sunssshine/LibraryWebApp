@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+    -for (book of books)
+        div.w3-card-4(style='width: 300px; display: inline-block; margin-left: 20px; margin-bottom: 20px')
+
+            div.w3-container.w3-center
+                p Есть ли в библиотеке: #{book.onHands}
+            div.w3-container.w3-center
+                p Дата выпуска: #{book.releaseDate}
+            div.w3-container.w3-center
+                p Автор: #{book.author}
+            div.w3-bar.w3-pink
+                span.w3-bar-item #{book.title}
+                a.w3-bar-item.w3-button.w3-right(href=`/library/books/${book.title}`)
+                    i.fa.fa-caret-right
+
+    div.w3-container
+            form(action='/library' method='POST' name="add-request")
+                p   Название
+                    p
+                        input(name='title')
+                p   Есть-ли в библиотеке
+                    p
+                        input(name='onHands')
+                p   Дата выпуска
+                    p
+                        input(name='releaseDate')
+                p
+                    input(type='submit' value='Добавить')
+
