@@ -1,12 +1,24 @@
 extends layout
 
 block content
-    .w3-card-4(style="position: relative; overflow: visible;")
+    style.
+        .book-background-img {
+
+
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 500px;
+
+
+
+        }
+    .w3-third
+        p
+    .w3-card-4.w3-third(style="width:350px;")
         form(action=`/library/books/${book.title}` method='PUT' name="change-book-state")
             .w3-container.w3-theme.w3-flat-midnight-blue.w3-center
                 h2 "#{book.title}"
-            .w3-container.w3-cell-row(
-            style="background-image: url(\"/images/neznajka.jpg\"); background-repeat: no-repeat; background-size: contain; width: 100%; height: 100%; height: 0; padding-top: 100.0%")
+            .w3-container.w3-cell-row.book-background-img(style=`background-image: url(\"${book.imageURL}\");`)
                 .w3-container.w3-cell.w3-cell-bottom
                     p
                         input.w3-input.w3-animate-input(type='text' name='title' style="width:50%" value=`${book.title}`)
@@ -19,12 +31,12 @@ block content
                         label.w3-tag.w3-flat-green-sea Дата выпуска
 
             button.w3-button.w3-container.w3-block.w3-flat-pumpkin(type="submit")
-                h2 Сохранить изменения
+                h3 Сохранить изменения
         form
             a.w3-button.w3-flat-wisteria(href="/library/" style="width: 23%;")
                 i.fa.fa-caret-left &nbsp Назад
             a.w3-button.w3-flat-nephritis(onclick="showModal();" style="width: 60%;") Изменить статус книги
-            button.w3-button.w3-metro-dark-red(href="/library/" style="width: 17%;" name="deleteBook" type="submit" value="this")
+            button.w3-button.w3-metro-dark-red(style="width: 17%;" name="deleteBook" type="submit" value="this")
                 i.fas.fa-trash-alt &nbsp
     #id01.w3-modal.w3-animate-opacity
         form(action=`./${book.title}` method='PUT' name="change-book-state")
@@ -36,10 +48,10 @@ block content
                         span.w3-button.w3-large.w3-display-topright(onclick="hideModal();") &times;
                     .w3-container
                         p
-                            input.w3-input.w3-animate-input(type='text' name=`usertake` style="width:50%" value=`${book.user}` disabled)
+                            input.w3-input.w3-animate-input(type='text' name=`usertake` style="width:90%" value=`${book.user}` disabled)
                             label.w3-tag.w3-flat-green-sea Имя пользователя
                         p
-                            input.w3-input.w3-animate-input(type='text' name=`deadline` style="width:30%" value=`${book.deadline}` disabled)
+                            input.w3-input.w3-animate-input(type='date' name=`deadline` style="width:80%" value=`${book.deadline}` disabled)
                             label.w3-tag.w3-flat-green-sea Крайний срок возврата
                     button.w3-button.w3-block.w3-flat-nephritis(type="submit" name="getBack" value="book") Забрать книгу
                 else
@@ -48,10 +60,10 @@ block content
                         span.w3-button.w3-large.w3-display-topright(onclick="hideModal();") &times;
                     .w3-container
                         p
-                            input.w3-input.w3-animate-input(type='text' name=`usertake` style="width:50%" value=`` placeholder="Введите имя пользователя которому будет выдана книга")
+                            input.w3-input.w3-animate-input(type='text' name=`usertake` style="width:90%" value=`` placeholder="Введите имя пользователя которому будет выдана книга")
                             label.w3-tag.w3-flat-green-sea Имя пользователя
                         p
-                            input.w3-input.w3-animate-input(type='text' name=`deadline` style="width:30%" value=`` placeholder="Введите крайний срок возврата книги")
+                            input.w3-input.w3-animate-input(type='date' name=`deadline` style="width:80%" value=`` placeholder="Введите крайний срок возврата книги")
                             label.w3-tag.w3-flat-green-sea Крайний срок возврата
                     button.w3-button.w3-block.w3-flat-nephritis(type="submit") Выдать книгу
     script.

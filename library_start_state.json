@@ -4,41 +4,42 @@
       "title": "Война и Мир",
       "author": "Неважно",
       "onHands": "True",
-      "releaseDate": "01/01/1998"
+      "releaseDate": "1998-01-01"
     },
     {
       "title": "Война и Война",
       "author": "Неважно",
       "onHands": "False",
-      "releaseDate": "01/02/1998",
-      "deadline": "13/12/2018",
+      "releaseDate": "1998-02-01",
+      "deadline": "2018-12-13",
       "user": "Данил Ильяшук"
     },
     {
       "title": "Незнайка на луне",
       "author": "Неважно",
       "onHands": "False",
-      "releaseDate": "01/03/1998",
-      "deadline": "11/12/2018",
-      "user": "Никита Ваганов"
+      "releaseDate": "1998-03-01",
+      "deadline": "2018-12-11",
+      "user": "Никита Ваганов",
+      "imageURL": "/images/neznajka.jpg"
     },
     {
       "title": "Вино из одуванчиков",
       "author": "Неважно",
       "onHands": "True",
-      "releaseDate": "01/04/1998"
+      "releaseDate": "1998-04-01"
     },
     {
       "title": "Атлант расправил плечи",
       "author": "Неважно",
       "onHands": "True",
-      "releaseDate": "01/05/1998"
+      "releaseDate": "01-05-1998"
     },
     {
       "title": "1984",
       "author": "Неважно",
       "onHands": "True",
-      "releaseDate": "01/06/1998"
+      "releaseDate": "1998-06-01"
     }
   ]
 }
