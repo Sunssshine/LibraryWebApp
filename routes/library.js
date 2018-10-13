@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
+var base64Img = require('base64-img');
+var path = require('path');
 
 router.put('/books/:bookTitle', function(req, res) {
 
@@ -65,10 +66,18 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-    if(req.body && req.body.title && req.body.onHands && req.body.releaseDate)
+    if(req.body && req.body.title && req.body.onHands && req.body.releaseDate && req.body.avatar)
     {
-        global.libraryState.books.push(req.body);
-        console.log(global.books);
+        base64Img.img(req.body.avatar, 'public/images', req.body.title, function(err, filepath) { console.log(filepath)
+            global.libraryState.books.push(
+                {
+                    title: req.body.title,
+                    onHands: req.body.onHands,
+                    releaseDate: req.body.releaseDate,
+                    imageURL: `/images/${path.basename(filepath)}`
+                });
+            console.log(global.books);
+        });
     }
     console.log(req.body);
     res.statusCode = 200;
