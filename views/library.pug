@@ -3,93 +3,54 @@ extends layout
 block content
     link(rel='stylesheet' href='/stylesheets/croppie.css')
     script(src='/javascripts/croppie.js')
+    script(src='/javascripts/library_UI.js')
     h1= title
     p Welcome to #{title}
-    -for (book of books)
-        div.w3-card-4(style='width: 300px; display: inline-block; margin-left: 20px; margin-bottom: 20px')
+        div
+            input(type="radio" id="show-all" name="view_settings" value="show-all" checked onclick='filterBookList(this)')
+            label(for="show-all") Показать все
+        div
+            input(type="radio" id="show-onHands" name="view_settings" value="show-onHands" onclick='filterBookList(this)')
+            label(for="show-onHands") Показать книги в библиотеке
+        div
+            input(type="radio" id="show-not-onHands" name="view_settings" value="show-not-onHands" onclick='filterBookList(this)')
+            label(for="show-not-onHands") Показать выданные книги
+    div.w3-container.w3-twothird
+        -for (book of books)
+            div.w3-card-4(style='width: 250px; display: inline-block; margin-left: 20px; margin-bottom: 20px')
 
-            div.w3-container.w3-center
-                p Есть ли в библиотеке: #{book.onHands}
-            div.w3-container.w3-center
-                p Дата выпуска: #{book.releaseDate}
-            div.w3-container.w3-center
-                p Автор: #{book.author}
-            div.w3-bar.w3-pink
-                span.w3-bar-item #{book.title}
-                a.w3-bar-item.w3-button.w3-right(href=`/library/books/${book.title}`)
-                    i.fa.fa-caret-right
+                div.w3-container.w3-center
+                    p Есть ли в библиотеке: #{book.onHands}
+                div.w3-container.w3-center
+                    p Дата выпуска: #{book.releaseDate}
+                div.w3-container.w3-center
+                    p Автор: #{book.author}
+                div.w3-bar.w3-pink
+                    span.w3-bar-item #{book.title}
+                    a.w3-bar-item.w3-button.w3-right(href=`/library/books/${book.title}`)
+                        i.fa.fa-caret-right
 
-    div.w3-container
-            form(action='/library' method='POST' name="add-request")
-                p   Название
+    div.w3-container.w3-third
+        form(action='/library' method='POST' name="add-request")
+            .w3-card.w3-container
+                .w3-third
+                    p   Название
+                        p
+                            input(name='title' required)
+                    p   Автор
+                        p
+                            input(name='author' required)
+                    p   Дата выпуска
+                        p
+                            input(name='releaseDate' type='date' required)
+                    p   Аватар
+                        p
+                            img#avatar-preview(style="width: 100px; height: 150px")
+                            input(type='hidden' id='result_crop' name='avatar' required)
                     p
-                        input(name='title')
-                p   Есть-ли в библиотеке
-                    p
-                        input(name='onHands')
-                p   Дата выпуска
-                    p
-                        input(name='releaseDate' type='date')
-                p   Аватар
-                    p
-                        img#avatar-preview(style="width: 100px; height: 150px")
-                        input(type='hidden' id='result_crop' name='avatar')
-                p
-                    input(type='submit' value='Добавить')
+                        input(type='submit' value='Добавить')
 
-    #vanilla-demo.w3-card(style="width:30%; heigth:30%")
-    button.vanilla-result Result
-    input(type='file' id='avatar' accept="image/*")
+                #vanilla-demo.w3-twothird.vanilla-kek
+        button.vanilla-result Result
+                input(type='file' id='avatar' accept="image/*")
 
-    script.
-        var el = document.getElementById('vanilla-demo');
-
-        var vanilla = new Croppie(el, {
-            viewport: {width: 200, height: 300, type: "square"},
-            boundary: {width: 400, height: 400},
-            //showZoomer: true,
-            enableOrientation: false
-        });
-
-        vanilla.bind({
-            url: "/images/200x200.png"
-        });
-        //on button click
-        vanilla.result('blob').then(function (blob)
-        {
-            // do something with cropped blob
-            var div_result = document.getElementById('result_crop');
-            div_result.src = window.URL.createObjectURL(blob)
-
-
-        });
-
-        document.querySelector('.vanilla-result').addEventListener('click', function (ev)
-        {
-            vanilla.result({
-                type: 'base64',
-                size: 'original'
-            }).then(function (base64str)
-            {
-                var div_result = document.getElementById('result_crop');
-                document.getElementById('avatar-preview').src = base64str;
-                document.getElementById('result_crop').value = base64str;
-
-            });
-        });
-
-        var avatar_input = document.getElementById('avatar')
-        avatar_input.setAttribute("onchange", "loadFile(event);")
-
-        var loadFile = function (event)
-        {
-            var reader = new FileReader();
-            reader.onload = function ()
-            {
-                avatar_input.val = reader.result;
-                vanilla.bind({
-                    url: reader.result
-                });
-            };
-            reader.readAsDataURL(event.target.files[0]);
-        };

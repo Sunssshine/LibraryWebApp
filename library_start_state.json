@@ -3,14 +3,14 @@
     {
       "title": "Война и Мир",
       "author": "Неважно",
-      "onHands": "True",
+      "onHands": true,
       "releaseDate": "1998-01-01",
       "imageURL": "/images/warandpeace.jpg"
     },
     {
       "title": "Война и Война",
       "author": "Неважно",
-      "onHands": "False",
+      "onHands": false,
       "releaseDate": "1998-02-01",
       "deadline": "2018-12-13",
       "user": "Данил Ильяшук",
@@ -19,7 +19,7 @@
     {
       "title": "Незнайка на луне",
       "author": "Неважно",
-      "onHands": "False",
+      "onHands": false,
       "releaseDate": "1998-03-01",
       "deadline": "2018-12-11",
       "user": "Никита Ваганов",
@@ -28,21 +28,21 @@
     {
       "title": "Вино из одуванчиков",
       "author": "Неважно",
-      "onHands": "True",
+      "onHands": true,
       "releaseDate": "1998-04-01",
       "imageURL": "/images/dandellionwine.jpg"
     },
     {
       "title": "Атлант расправил плечи",
       "author": "Айн Ренд",
-      "onHands": "True",
+      "onHands": true,
       "releaseDate": "01-05-1998",
       "imageURL": "/images/atlant.jpg"
     },
     {
       "title": "1984",
       "author": "Джордж Оруэлл",
-      "onHands": "True",
+      "onHands": true,
       "releaseDate": "1998-06-01",
       "imageURL": "/images/1984.jpg"
     }

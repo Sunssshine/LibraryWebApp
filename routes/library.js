@@ -30,14 +30,14 @@ router.get('/books/:bookTitle', function(req, res)
     {
         global.libraryState.books[calledBookNumber].user = req.query.usertake;
         global.libraryState.books[calledBookNumber].deadline = req.query.deadline;
-        global.libraryState.books[calledBookNumber].onHands = "False";
+        global.libraryState.books[calledBookNumber].onHands = false;
     }
 
     if(req.query.getBack)
     {
-        global.libraryState.books[calledBookNumber].user = "";              // TODO сделать нормальными поля ввода дат
+        global.libraryState.books[calledBookNumber].user = "";
         global.libraryState.books[calledBookNumber].deadline = "";
-        global.libraryState.books[calledBookNumber].onHands = "True";
+        global.libraryState.books[calledBookNumber].onHands = true;
     }
 
     if(req.query.title && req.query.author && req.query.releaseData)
@@ -62,26 +62,57 @@ router.get('/books/:bookTitle', function(req, res)
 });
 /* GET users listing. */
 router.get('/', function(req, res) {
-    res.render('library', { title: 'Library', books: global.libraryState.books }); //TODO AJAX запрос на добавление и удаление книги
+    res.render('library', { title: 'Library', books: global.libraryState.books });
 });
 
 router.post('/', function(req, res) {
-    if(req.body && req.body.title && req.body.onHands && req.body.releaseDate && req.body.avatar)
+    if(req.body && req.body.title
+        && req.body.releaseDate && req.body.author)
     {
-        base64Img.img(req.body.avatar, 'public/images', req.body.title, function(err, filepath) { console.log(filepath)
-            global.libraryState.books.push(
-                {
-                    title: req.body.title,
-                    onHands: req.body.onHands,
-                    releaseDate: req.body.releaseDate,
-                    imageURL: `/images/${path.basename(filepath)}`
-                });
-            console.log(global.books);
-        });
+        if(req.body.avatar)
+        {
+            base64Img.img(req.body.avatar, 'public/images', req.body.title, function (err, filepath)
+            {
+                console.log(filepath);
+                global.libraryState.books.push(
+                    {
+                        title: req.body.title,
+                        onHands: true,
+                        releaseDate: req.body.releaseDate,
+                        author: req.body.author,
+                        imageURL: `/images/${path.basename(filepath)}`
+                    });
+            });
+        }
+        else
+        {
+            req.body.onHands = true;
+            global.libraryState.books.push(req.body);
+        }
+
+        console.log(req.body);
+        console.log(req.baseUrl);
+        return res.redirect(req.baseUrl);
     }
-    console.log(req.body);
+
+    if(req.body.filter)
+    {
+        if(req.body.filter === 'show-all')
+        {
+            //TODO Вернуть список элементов global.libraryState.books
+        }
+        else if(req.body.filter === 'show-onHands')
+        {
+            //TODO Вернуть список элементов global.libraryState.book с полем onHands === true
+        }
+        else if(req.body.filter === 'show-not-onHands')
+        {
+            //TODO Вернуть список элементов global.libraryState.book с полем onHands === false
+        }
+    }
+
     res.statusCode = 200;
-    res.render('library', { title: 'Library', books: global.libraryState.books }); //TODO Запрос на открытие странички книги
-});                         //TODO Поле взявшего книгу юзера и возврат книги
+    res.render('library', { title: 'Library', books: global.libraryState.books });
+});
 
 module.exports = router;
