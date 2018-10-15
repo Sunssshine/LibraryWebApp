@@ -94,20 +94,27 @@ router.post('/', function(req, res) {
         console.log(req.baseUrl);
         return res.redirect(req.baseUrl);
     }
-
+    console.log(req.body)
     if(req.body.filter)
     {
         if(req.body.filter === 'show-all')
         {
-            //TODO Вернуть список элементов global.libraryState.books
+            res.statusCode = 200;
+            res.send(JSON.stringify(global.libraryState.books));
+            return
         }
         else if(req.body.filter === 'show-onHands')
         {
-            //TODO Вернуть список элементов global.libraryState.book с полем onHands === true
+            res.statusCode = 200;
+            console.log(JSON.stringify(global.libraryState.books.filter(book => book.onHands == true)));
+            res.send(JSON.stringify(global.libraryState.books.filter(book => book.onHands == true)));
+            return
         }
         else if(req.body.filter === 'show-not-onHands')
         {
-            //TODO Вернуть список элементов global.libraryState.book с полем onHands === false
+            res.statusCode = 200;
+            res.send(JSON.stringify(global.libraryState.books.filter(book => book.onHands == false)))
+            return
         }
     }
 

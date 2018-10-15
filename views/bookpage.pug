@@ -3,22 +3,21 @@ extends layout
 block content
     script(src='/javascripts/bookpage.js')
     link(rel='stylesheet', href='/stylesheets/bookpage.css')
-    .w3-third
-        p
-    .w3-card-4.w3-third(style="width:333px;")
+
+    .w3-card-4(style="width:333px; margin: auto;")
         form(action=`/library/books/${book.title}` method='PUT' name="change-book-state")
             .w3-container.w3-theme.w3-flat-midnight-blue.w3-center
                 h2 "#{book.title}"
             .w3-container.w3-cell-row.book-background-img(style=`background-image: url(\"${book.imageURL}\");`)
                 .w3-container.w3-cell.w3-cell-bottom
                     p
-                        input.w3-input.w3-animate-input(type='text' name='title' style="width:50%" value=`${book.title}`)
+                        input.w3-input.w3-animate-input(type='text' name='title' style="width:80%" value=`${book.title}`)
                         label.w3-tag.w3-flat-green-sea Название
                     p
-                        input.w3-input.w3-animate-input(type='text' name='author' style="width:30%" value=`${book.author}`)
+                        input.w3-input.w3-animate-input(type='text' name='author' style="width:70%" value=`${book.author}`)
                         label.w3-tag.w3-flat-green-sea Автор
                     p
-                        input.w3-input.w3-animate-input(type='date' name='releaseData' style="width:50%" value=`${book.releaseDate}`)
+                        input.w3-input.w3-animate-input(type='date' name='releaseData' style="width:60%" value=`${book.releaseDate}`)
                         label.w3-tag.w3-flat-green-sea Дата выпуска
 
             button.w3-button.w3-container.w3-block.w3-flat-pumpkin(type="submit")

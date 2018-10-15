@@ -1,7 +1,29 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  style.
+    #jojo:hover {
+      cursor: pointer;
+    }
 
+  body
 
+  div(style='margin-left: auto; text-align: center; margin-top: 7%')
+    img(src='/gifs/1539152636882.gif' id='jojo' style='width: 66%; display:none;' onclick="document.location.href=\'./library/\';")
+    button.w3-button.w3-padding-large.w3-pink(onclick='start()' id='liar')
+      h1 В библиотеку
+
+  script.
+    function start()
+    {
+        document.getElementById('jojo').style.display = 'inline';
+        document.getElementById('liar').style.display = 'none';
+        var yareyare = new Audio('/audio/yareyaredaze.mp3');
+        var supersong = new Audio('/audio/datsong.mp3');
+        yareyare.loop = true;
+        supersong.loop = true;
+        supersong.volume = 0.05;
+        yareyare.play();
+        supersong.play();
+        isStarted = true;
+    }
