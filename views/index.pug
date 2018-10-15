@@ -1,23 +1,20 @@
 extends layout
 
 block content
-  style.
-    #jojo:hover {
-      cursor: pointer;
-    }
-
-  body
+  link(rel='stylesheet', href='/stylesheets/index.css')
 
   div(style='margin-left: auto; text-align: center; margin-top: 7%')
-    img(src='/gifs/1539152636882.gif' id='jojo' style='width: 66%; display:none;' onclick="document.location.href=\'./library/\';")
-    button.w3-button.w3-padding-large.w3-pink(onclick='start()' id='liar')
-      h1 В библиотеку
+    div.gradient-border(id="jojo-reference")
+      img(src='/gifs/1539152636882.gif' id='jojo' style='width: 100%;' onclick="document.location.href=\'./library/\';")
+    div.gradient-border(id='startbutton')
+      button.w3-button.w3-padding-large.w3-pink(onclick='start()' id='liar')
+        h1 В библиотеку
 
   script.
     function start()
     {
-        document.getElementById('jojo').style.display = 'inline';
-        document.getElementById('liar').style.display = 'none';
+        document.getElementById('jojo-reference').style.display = 'inline-block';
+        document.getElementById('startbutton').style.display = 'none';
         var yareyare = new Audio('/audio/yareyaredaze.mp3');
         var supersong = new Audio('/audio/datsong.mp3');
         yareyare.loop = true;
