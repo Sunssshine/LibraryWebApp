@@ -9,7 +9,7 @@ var vanilla = new Croppie(el, {
 });
 
 vanilla.bind({
-    url: "/images/200x200.png"
+    url: "/images/book_cover_by_default.jpg"
 });
 //on button click
 document.querySelector('.vanilla-kek').addEventListener('update', function(ev) {
