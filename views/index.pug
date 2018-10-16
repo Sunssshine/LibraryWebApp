@@ -2,25 +2,36 @@ extends layout
 
 block content
   link(rel='stylesheet', href='/stylesheets/index.css')
-
-  div(style='margin-left: auto; text-align: center; margin-top: 7%')
+  button(onclick='yareyaredaze()' style="color: transparent; background-color: transparent; border-color: transparent; cursor: pointer")
+    h2 TEXT
+  div(style='margin-left: auto; text-align: center;')
     div.gradient-border(id="jojo-reference")
       img(src='/gifs/1539152636882.gif' id='jojo' style='width: 100%;' onclick="document.location.href=\'./library/\';")
     div.gradient-border(id='startbutton')
-      button.w3-button.w3-padding-large.w3-pink(onclick='start()' id='liar')
+      button.w3-button.w3-padding-large.w3-pink(onclick='start()' id='liar' style='border-radius:3px')
         h1 В библиотеку
 
   script.
+    var yareyare = new Audio('/audio/yareyaredaze.mp3');
+    var supersong = new Audio('/audio/datsong.mp3');
+    var yareyareactive = false;
     function start()
     {
         document.getElementById('jojo-reference').style.display = 'inline-block';
         document.getElementById('startbutton').style.display = 'none';
-        var yareyare = new Audio('/audio/yareyaredaze.mp3');
-        var supersong = new Audio('/audio/datsong.mp3');
         yareyare.loop = true;
         supersong.loop = true;
         supersong.volume = 0.05;
         yareyare.play();
+        yareyareactive = true;
         supersong.play();
-        isStarted = true;
+    }
+
+
+    function yareyaredaze()
+    {
+        if(yareyareactive)
+            yareyare.pause();
+        else
+            yareyare.play();
     }
