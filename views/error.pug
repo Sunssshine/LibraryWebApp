@@ -1,6 +1,47 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  body(onclick='start()')
+    link(rel='stylesheet', href='/stylesheets/index.css')
+    button(onclick='yareyaredaze()' style="color: transparent; background-color: transparent; border-color: transparent; cursor: pointer")
+      h2 TEXT
+    div(style='margin-left: auto; text-align: center;')
+      h1(style='color:red; margin-bottom: 40px') Ошибка 404. Страница не найдена.
+      div.w3-animate-opacity.gradient-border(id="jojo-reference")
+        img(src='/gifs/yareyaredaze.gif' id='jojo' style='width: 100%;' onclick="document.location.href=\'./library/\';")
+
+
+  script.
+      var yareyare = new Audio('/audio/yareyaredaze.mp3');
+      var supersong = new Audio('/audio/datsong.mp3');
+      var yareyareactive = false;
+      isStarted = false;
+      function start()
+      {
+          if(isStarted === false)
+          {
+              document.getElementById('jojo-reference').style.display = 'inline-block';
+              yareyare.loop = true;
+              supersong.loop = true;
+              supersong.volume = 0.05;
+              yareyare.play();
+              yareyareactive = true;
+              supersong.play();
+              isStarted = true;
+          }
+      }
+
+
+      function yareyaredaze()
+      {
+          if(yareyareactive)
+          {
+              yareyare.pause();
+              yareyareactive = false;
+          }
+          else
+          {
+              yareyareactive = true;
+              yareyare.play();
+          }
+      }
